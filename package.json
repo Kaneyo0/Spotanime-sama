@@ -1,29 +1,19 @@
 {
-  "name": "spotify-sama",
-  "version": "1.0.0",
-  "description": "Vue.js project based on Spotify and Deezer",
-  "main": "app.js",
+  "name": "spotanime-sama",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "devstart": "nodemon app.js",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "sass:w": "sass --watch sass/main.scss:public/css/main.css"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Kaneyo0/Spotify-sama.git"
-  },
-  "author": "Tom DUCHESNE and Maxime PAGET",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Kaneyo0/Spotify-sama/issues"
-  },
-  "homepage": "https://github.com/Kaneyo0/Spotify-sama#readme",
   "dependencies": {
-    "express": "^4.18.2",
+    "pinia": "^2.0.32",
     "vue": "^3.2.47"
   },
   "devDependencies": {
-    "nodemon": "^2.0.21",
-    "sass": "^1.59.3"
+    "@vitejs/plugin-vue": "^4.0.0",
+    "vite": "^4.1.4"
   }
 }

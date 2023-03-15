@@ -1,5 +1,5 @@
 <script>
-    import Card from './Card.vue';
+    import Card from '../../../src/components./../SPOTANIME-SAMA/src/components/Card.vue';
     export default {
         props: {
             cards: {
