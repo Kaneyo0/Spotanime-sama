@@ -2,9 +2,11 @@
   "name": "spotify-sama",
   "version": "1.0.0",
   "description": "Vue.js project based on Spotify and Deezer",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "devstart": "nodemon app.js",
+    "sass:w": "sass --watch sass/main.scss:public/css/main.css"
   },
   "repository": {
     "type": "git",
@@ -17,6 +19,11 @@
   },
   "homepage": "https://github.com/Kaneyo0/Spotify-sama#readme",
   "dependencies": {
+    "express": "^4.18.2",
     "vue": "^3.2.47"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.21",
+    "sass": "^1.59.3"
   }
 }
