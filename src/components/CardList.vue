@@ -15,7 +15,7 @@
 </script>
 
 <template>
-    <div class="card__list" v-for="card in cards">
-        <Card :title="card.title" :content="card.content"/>
+    <div class="card__list">
+        <Card v-for="card in cards" :title="card.title" :content="card.content"/>
     </div>
 </template>
