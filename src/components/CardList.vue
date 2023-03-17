@@ -1,5 +1,7 @@
 <script>
-    import Card from '../../../src/components./../SPOTANIME-SAMA/src/components/Card.vue';
+    // import Card from '../../../src/components./../SPOTANIME-SAMA/src/components/Card.vue';
+    import Card from './Card.vue';
+
     export default {
         props: {
             cards: {
@@ -8,14 +10,12 @@
         },
         components: {
             Card
-        }
+        },
     }
 </script>
 
 <template>
-    <ul class="card-list">
-        <li v-for="card in cards">
-            <Card :title="feur"></Card>       
-        </li>
-    </ul>
+    <div class="card__list" v-for="card in cards">
+        <Card :title="card.title" :content="card.content"/>
+    </div>
 </template>

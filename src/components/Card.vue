@@ -1,10 +1,11 @@
 <script>
     export default {
-        data() {
-            return {
-                test: {
-                    title: 'feur'
-                }, value: 'feur'
+        props: {
+            title: {
+                type: String
+            },
+            content: {
+                type: String
             }
         }
     }
@@ -14,6 +15,6 @@
     <div class="card">
         <img src="" alt="" class="card__image">
         <h1 class="card__title">{{ title }}</h1>
-        <h2>{{ value }}</h2>
+        <p>{{ content }}</p>
     </div>
 </template>
