@@ -17,10 +17,12 @@
 </script>
 
 <template>
-    <h3 class="card__list__title">{{ title }}</h3>
-    <ul class="card__list">
-        <li class="card__list__item" v-for="card in cards">
-            <Card :title="card.title" :content="card.content"/>
-        </li>
-    </ul>
+    <article class="article">
+        <h3 class="card__list__title">{{ title }}</h3>
+        <ul class="card__list">
+            <li class="card__list__item" v-for="card in cards">
+                <Card :title="card.title" :content="card.content"/>
+            </li>
+        </ul>
+    </article>
 </template>
