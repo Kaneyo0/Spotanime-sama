@@ -11,12 +11,13 @@
     margin: 1rem;
     border-radius: 25px;
     position: relative;
-    width: 250px;
+    width: 10rem;
     cursor: pointer;
+    height: 80%;
     transition: transform 0.3s;
+    padding: 2rem;
     @include mq(M) {
-        width: 350px;
-        padding: 2rem;
+  
     }
 }
 

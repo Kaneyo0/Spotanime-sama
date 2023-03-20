@@ -1,34 +1,24 @@
-@use '../abstract/mixin' as *;
-
 body {
     font-family: var(--ff-source);
     font-size: var(--fs-regular);
-    color: white;
-    height: 100vh;
-    overflow-y: hidden;
-}
-
-.header {
-    position: relative;
-    z-index: 10;
-    height: var(--header-height);
-    background: var(--secondary-color);
-}
-
-.main {
-    height: var(--main-height);
-    overflow-y: hidden;
-}
-
-.background__image {
-    position: fixed;
-    z-index: 5;
-    width: 20rem;
-    top: 3rem;
-    left: 0rem;
-    @include mq(M) {
-        width: 50rem;
-        top: 5rem;
-        left: 20rem;
+    &::-webkit-scrollbar {
+        display: none;
     }
+    background-color: var(--clr-black);
+    color: var(--clr-text);
+    font-size: var(--fs-text);
+}
+
+.app {
+    min-width: 100vw;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: auto; 
+    gap: 3rem;
+    width: 70%;
 }

@@ -1,0 +1,26 @@
+.header {
+    display: flex;
+    height: 3rem;
+    align-items: center;    
+    position: relative;
+    &__icon {
+        max-height: 80%
+    }
+    &__search-bar {
+        opacity: 0.9;
+        position: absolute;
+        left: 50%;
+        height: 100%;
+        background-color: var(--clr-black);
+        border: none;
+        color: var(--clr-light-mute);
+        text-transform: uppercase;
+        &:focus {
+            outline: 2px solid var(--secondary-color) ;
+        }
+        &::placeholder {
+            opacity: 0.8;
+            color: var(--clr-light-mute)
+        }
+    }
+}
