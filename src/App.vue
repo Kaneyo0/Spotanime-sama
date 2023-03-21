@@ -61,11 +61,14 @@
             }
         },
         async created() {
-            [this.mostPlayedSongs,  this.mostAlbums ] = await Promise.all([
-                this.fetchMostPlayedSong(),
-                this.fetchMostAlbumListen()
+            await Promise.all([
+                this.fetchMostPlayedSong().then(result => {
+                    this.mostPlayedSongs = result
+                }),
+                this.fetchMostAlbumListen().then(result => {
+                    this.mostAlbums = result
+                })
             ]);
-            console.log(this.mostAlbums)
         },
     }
 </script>
