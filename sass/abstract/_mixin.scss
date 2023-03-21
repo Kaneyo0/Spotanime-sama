@@ -1,7 +1,0 @@
-@use 'breakpoint' as breakpoints;
-
-@mixin mq($_key) {
-    @media (min-width: map-get(breakpoints.$mapBreakpoint, $_key)) {
-        @content;
-    }
-};

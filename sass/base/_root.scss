@@ -2,15 +2,10 @@
     --header-height: 5vh;
     --main-height: calc(100vh - var(--header-height));
 
-    --bkg-image-color: rgb(33, 24, 82);
-    --main-color: rgb(18, 11, 59);
-    --secondary-color: rgb(70, 52, 169);
-    --third-color: rgb(40, 33, 80);
-    --card-hover-color: rgb(90, 67, 220);
-    --clr-grey: rgb(84, 81, 110);
-    --pink-color: rgb(240, 74, 255);
-    --pink-hover-color: rgb(243, 135, 253);
-    --orange-color: rgb(232, 195, 137);
+    --clr-card-list: #34495e;
+    --clr-card-main: #41b883;
+    --clr-card-main-hover: #41b8839d;
+    --clr-black-light: rgb(32, 32, 32);
     --clr-black: #181818;
     --clr-text: rgba(235, 235, 235, 0.64);
     --clr-light-mute: #f2f2f2;

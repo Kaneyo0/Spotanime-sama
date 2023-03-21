@@ -75,15 +75,10 @@ select {
 :root {
   --header-height: 5vh;
   --main-height: calc(100vh - var(--header-height));
-  --bkg-image-color: rgb(33, 24, 82);
-  --main-color: rgb(18, 11, 59);
-  --secondary-color: rgb(70, 52, 169);
-  --third-color: rgb(40, 33, 80);
-  --card-hover-color: rgb(90, 67, 220);
-  --clr-grey: rgb(84, 81, 110);
-  --pink-color: rgb(240, 74, 255);
-  --pink-hover-color: rgb(243, 135, 253);
-  --orange-color: rgb(232, 195, 137);
+  --clr-card-list: #34495e;
+  --clr-card-main: #41b883;
+  --clr-card-main-hover: #41b8839d;
+  --clr-black-light: rgb(32, 32, 32);
   --clr-black: #181818;
   --clr-text: rgba(235, 235, 235, 0.64);
   --clr-light-mute: #f2f2f2;
@@ -120,6 +115,7 @@ body::-webkit-scrollbar {
   padding: 0 10rem;
   gap: 3rem;
   height: var(--main-height);
+  background-color: var(--clr-black-light);
 }
 
 .card {
@@ -127,27 +123,32 @@ body::-webkit-scrollbar {
   flex-direction: column;
   flex-shrink: 0;
   gap: 1rem;
-  background-color: var(--secondary-color);
-  border: 5px solid var(--third-color);
-  padding: 1rem;
+  background-color: var(--clr-card-main);
   margin: 1rem;
-  border-radius: 25px;
+  border-radius: 10px;
   position: relative;
-  width: 10rem;
+  width: 12rem;
   cursor: pointer;
   height: 80%;
   transition: transform 0.3s;
-  padding: 2rem;
+  overflow: hidden;
 }
+
 .card:hover {
-  background-color: var(--card-hover-color);
+  background-color: var(--clr-card-main-hover);
   transform: scale(1.1);
 }
 
+.card__image {
+  height: 40%;
+  width: 100%;
+}
+
 .card__title {
-  font-size: 1.5rem;
+  font-size: 0.8rem;
   padding: 0 1rem;
   text-transform: uppercase;
+  color: var(--clr-light-mute);
 }
 
 .card__list {
@@ -156,7 +157,7 @@ body::-webkit-scrollbar {
   height: 20rem;
   list-style: none;
   padding-left: 0px;
-  background-color: var(--clr-grey);
+  background-color: var(--clr-card-list);
   border-radius: 10px;
   /* width */
   /* Track */

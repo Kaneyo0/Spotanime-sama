@@ -1,33 +1,33 @@
-@use '../abstract/mixin' as *;
-
 .card {
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
     gap: 1rem;
-    background-color: var(--secondary-color);
-    border: 5px solid var(--third-color);
-    padding: 1rem;
+    background-color: var(--clr-card-main);
     margin: 1rem;
-    border-radius: 25px;
+    border-radius: 10px;
     position: relative;
-    width: 10rem;
+    width: 12rem;
     cursor: pointer;
     height: 80%;
     transition: transform 0.3s;
-    padding: 2rem;
-    @include mq(M) {
-  
-    }
+    // padding: 1rem;
+    overflow: hidden;
 }
 
 .card:hover {
-    background-color: var(--card-hover-color);
+    background-color: var(--clr-card-main-hover);
     transform: scale(1.1);
 }
 
+.card__image {
+    height: 40%;
+    width: 100%;
+}
+
 .card__title {
-    font-size: 1.5rem;
+    font-size: 0.8rem;
     padding: 0 1rem;
     text-transform: uppercase;
+    color: var(--clr-light-mute);
 }
