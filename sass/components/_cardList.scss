@@ -25,14 +25,14 @@
     
     /* Handle */
     &::-webkit-scrollbar-thumb {
-        background-color: var(--secondary-color);
+        background-color: var(--clr-card-main);
         border-radius: 10px;
         width: .5rem;
     }
     
     /* Handle on hover */
     &::-webkit-scrollbar-thumb:hover {
-        background-color: var(--card-hover-color);
+        background-color: var(--clr-card-main-hover);
     }
 }
 

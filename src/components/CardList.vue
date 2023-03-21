@@ -12,7 +12,7 @@
         },
         components: {
             Card
-        },
+        }
     }
 </script>
 
@@ -21,7 +21,7 @@
         <h3 class="card__list__title">{{ title }}</h3>
         <ul class="card__list">
             <li class="card__list__item" v-for="card in cards">
-                <Card :title="card.title" :album="card.album"/>
+                <Card :title="card.title" :image="card.image"/>
             </li>
         </ul>
     </article>
