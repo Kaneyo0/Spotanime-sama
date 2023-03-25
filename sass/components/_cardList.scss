@@ -9,6 +9,10 @@
     &__item {
         display: flex;
         align-items: center;
+        &>a {
+            height: 100%;
+            text-decoration: none;
+        }
     }
     &__title {
         text-transform: uppercase;

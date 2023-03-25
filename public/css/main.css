@@ -97,6 +97,7 @@ body {
   background-color: var(--clr-black);
   color: var(--clr-text);
   font-size: var(--fs-text);
+  overflow: hidden;
 }
 body::-webkit-scrollbar {
   display: none;
@@ -104,18 +105,9 @@ body::-webkit-scrollbar {
 
 .app {
   min-width: 100vw;
-  min-height: 100vh;
+  min-height: 90vh;
   overflow: hidden;
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  padding: 0 10rem;
-  gap: 3rem;
-  height: var(--main-height);
-  background-color: var(--clr-black-light);
+  margin-bottom: 10rem;
 }
 
 .card {
@@ -131,24 +123,33 @@ body::-webkit-scrollbar {
   cursor: pointer;
   height: 80%;
   transition: transform 0.3s;
-  overflow: hidden;
+  position: relative;
 }
-
 .card:hover {
   background-color: var(--clr-card-main-hover);
   transform: scale(1.1);
 }
-
 .card__image {
   height: 40%;
   width: 100%;
 }
-
 .card__title {
   font-size: 0.8rem;
   padding: 0 1rem;
   text-transform: uppercase;
   color: var(--clr-light-mute);
+}
+.card__playlist-add {
+  position: absolute;
+  background-color: var(--clr-card-main);
+  border-radius: 50px;
+  right: -1rem;
+  top: -1rem;
+  z-index: 1;
+}
+.card__playlist-add:hover {
+  background-color: var(--clr-card-main-hover);
+  transform: scale(1.1);
 }
 
 .card__list {
@@ -167,6 +168,10 @@ body::-webkit-scrollbar {
 .card__list__item {
   display: flex;
   align-items: center;
+}
+.card__list__item > a {
+  height: 100%;
+  text-decoration: none;
 }
 .card__list__title {
   text-transform: uppercase;
@@ -211,6 +216,17 @@ body::-webkit-scrollbar {
 .header__search-bar::placeholder {
   opacity: 0.8;
   color: var(--clr-light-mute);
+}
+
+.container__lists {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  overflow-y: auto;
+  padding: 3rem 10rem 3rem;
+  gap: 3rem;
+  height: var(--main-height);
+  background-color: var(--clr-black-light);
 }
 
 /*# sourceMappingURL=main.css.map */

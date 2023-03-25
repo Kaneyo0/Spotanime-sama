@@ -7,20 +7,12 @@ body {
     background-color: var(--clr-black);
     color: var(--clr-text);
     font-size: var(--fs-text);
+    overflow: hidden;
 }
 
 .app {
     min-width: 100vw;
-    min-height: 100vh;
+    min-height: 90vh;
     overflow: hidden;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    padding: 0 10rem;
-    gap: 3rem;
-    height: var(--main-height);
-    background-color: var(--clr-black-light);
+    margin-bottom: 10rem;
 }
