@@ -4,8 +4,12 @@
     height: 20rem;
     list-style: none;
     padding-left: 0px;
+    padding-top: 1rem;
     background-color: var(--clr-card-list);
     border-radius: 10px;
+    &__container {
+        padding: 0 5rem;
+    }
     &__item {
         display: flex;
         align-items: center;
@@ -16,6 +20,7 @@
     }
     &__title {
         text-transform: uppercase;
+        padding: 1rem 2rem;
     }
     /* width */
     &::-webkit-scrollbar {

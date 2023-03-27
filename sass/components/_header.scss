@@ -4,7 +4,7 @@
     align-items: center;    
     position: relative;
     &__icon {
-        max-height: 80%
+        height: 80%
     }
     &__search-bar {
         opacity: 0.9;
@@ -22,5 +22,8 @@
             opacity: 0.8;
             color: var(--clr-light-mute)
         }
+    }
+    &__link {
+        height: 100%;
     }
 }

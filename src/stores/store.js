@@ -8,24 +8,7 @@ const store = {
     list: {
         playlist: {
             title: 'Mes playlist',
-            items: [
-                {
-                    title: 'FEUR',
-                    content: 'feur content'
-                },
-                {
-                    title: 'FEUR',
-                    content: 'feur content'
-                },
-                {
-                    title: 'FEUR',
-                    content: 'feur content'
-                },
-                {
-                    title: 'FEUR',
-                    content: 'feur content'
-                }
-            ]
+            items: []
         },
         albums: {
             title: 'Album en tendance',
@@ -43,11 +26,7 @@ const store = {
         try {
             const response = await fetch(`${API.SONGS}/?page=1`);
             const songs = await response.json();
-            for (const song of songs) {
-                const songId = song.youtube.split('/').pop();
-                // url permettant de récupérer les miniatures des vidéos youtube à partir de l'id de la vidéo
-                song.image = `https://img.youtube.com/vi/${songId}/0.jpg`
-            }
+            this.setMusicListImages(songs);
             return songs;
         } catch (error) {
             console.error(error);
@@ -77,6 +56,30 @@ const store = {
         }
     },
 
+    async fetchSong(id) {
+        try {
+            let response = await fetch(`${API.SONGS}/${id}`);
+            return await response.json();
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
+    async fetchAlbum(id) {
+        try {
+            let album;
+            await fetch(`${API.ALBUMS}/${id}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    this.setMusicListImages(data.songs);
+                    album = data;
+                });
+            return album;
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
     async fetchPlaylist(id) {
         try {
             let response = await fetch(`${API.PLAYLISTS}/${id}`);
@@ -95,6 +98,14 @@ const store = {
                 this.list.albums.items = result
             })
         ]);
+    },
+
+    async setMusicListImages(musicList) {
+        for (const song of musicList) {
+            const songId = song.youtube.split('/').pop();
+            // url permettant de récupérer les miniatures des vidéos youtube à partir de l'id de la vidéo
+            song.image = `https://img.youtube.com/vi/${songId}/0.jpg`;
+        }
     },
     
     add (songId) {

@@ -27,11 +27,11 @@
 </script>
 
 <template>
-    <article class="article">
+    <article class="card__list__container">
         <h3 class="card__list__title">{{ title }}</h3>
         <ul class="card__list" :data-name="name">
-            <li class="card__list__item" v-for="(card, index) in cards">
-                <Card :detailRoute="detailRoute" :isSongCard="isSongList" :id="index" :title="card.title" :image="card.image"/>
+            <li class="card__list__item" v-for="(card) in cards">
+                <Card :detailRoute="detailRoute" :isSongCard="isSongList" :id="card.id" :title="card.title" :image="card.image"/>
             </li>
         </ul>
     </article>

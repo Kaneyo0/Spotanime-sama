@@ -113,7 +113,6 @@ body::-webkit-scrollbar {
 .card {
   display: flex;
   flex-direction: column;
-  flex-shrink: 0;
   gap: 1rem;
   background-color: var(--clr-card-main);
   margin: 1rem;
@@ -121,7 +120,7 @@ body::-webkit-scrollbar {
   position: relative;
   width: 12rem;
   cursor: pointer;
-  height: 80%;
+  height: 85%;
   transition: transform 0.3s;
   position: relative;
 }
@@ -158,12 +157,16 @@ body::-webkit-scrollbar {
   height: 20rem;
   list-style: none;
   padding-left: 0px;
+  padding-top: 1rem;
   background-color: var(--clr-card-list);
   border-radius: 10px;
   /* width */
   /* Track */
   /* Handle */
   /* Handle on hover */
+}
+.card__list__container {
+  padding: 0 5rem;
 }
 .card__list__item {
   display: flex;
@@ -175,6 +178,7 @@ body::-webkit-scrollbar {
 }
 .card__list__title {
   text-transform: uppercase;
+  padding: 1rem 2rem;
 }
 .card__list::-webkit-scrollbar {
   height: 0.5rem;
@@ -198,7 +202,7 @@ body::-webkit-scrollbar {
   position: relative;
 }
 .header__icon {
-  max-height: 80%;
+  height: 80%;
 }
 .header__search-bar {
   opacity: 0.9;
@@ -217,16 +221,22 @@ body::-webkit-scrollbar {
   opacity: 0.8;
   color: var(--clr-light-mute);
 }
+.header__link {
+  height: 100%;
+}
+
+.container {
+  background-color: var(--clr-black-light);
+  overflow-y: auto;
+  height: var(--main-height);
+}
 
 .container__lists {
   display: flex;
   flex-direction: column;
   list-style: none;
-  overflow-y: auto;
-  padding: 3rem 10rem 3rem;
-  gap: 3rem;
-  height: var(--main-height);
-  background-color: var(--clr-black-light);
+  padding: 0;
+  gap: 2rem;
 }
 
 /*# sourceMappingURL=main.css.map */
