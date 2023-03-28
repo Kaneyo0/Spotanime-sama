@@ -24,7 +24,7 @@ const store = {
 
     async fetchMostPlayedSong() {
         try {
-            const response = await fetch(`${API.SONGS}/?page=1`);
+            const response = await fetch(`${API.SONGS}?page=1`);
             const songs = await response.json();
             this.setMusicListImages(songs);
             return songs;
