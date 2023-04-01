@@ -73,7 +73,7 @@ select {
   }
 }
 :root {
-  --header-height: 5vh;
+  --header-height: 7vh;
   --main-height: calc(100vh - var(--header-height));
   --clr-card-list: #34495e;
   --clr-card-main: #41b883;
@@ -206,7 +206,7 @@ body::-webkit-scrollbar {
   position: relative;
 }
 .header__icon {
-  height: 80%;
+  height: 100%;
 }
 .header__search-bar {
   opacity: 0.9;
@@ -219,14 +219,16 @@ body::-webkit-scrollbar {
   text-transform: uppercase;
 }
 .header__search-bar:focus {
-  outline: 2px solid var(--secondary-color);
+  outline: none;
+  border-bottom: 2px solid blue;
 }
 .header__search-bar::placeholder {
   opacity: 0.8;
   color: var(--clr-light-mute);
 }
 .header__link {
-  height: 100%;
+  height: 70%;
+  margin-left: 1rem;
 }
 
 .container {
