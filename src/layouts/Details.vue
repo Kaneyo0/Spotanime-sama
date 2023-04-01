@@ -27,7 +27,7 @@
                     this.album = await this.store.fetchAlbum(this.$route.params.id);
                     break;
                 default:
-                    console.log('Unknown element');
+                    console.error('Unknown element');
             }
         }
     }

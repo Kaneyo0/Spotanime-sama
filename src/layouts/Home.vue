@@ -30,7 +30,7 @@
     <main class="container">
         <ul class="container__lists">
             <li class="container__lists__item" v-for="(list, name) in store.list">
-                <CardList :detailRoute="list.detailRoute" :name="name" :isSongList="name === 'songs'" :title="list.title" :cards="list.items"></CardList>
+                <CardList v-show="list.items.length > 0" :detailRoute="list.detailRoute" :name="name" :isSongList="name === 'songs'" :title="list.title" :cards="list.items"></CardList>
             </li>
         </ul>
     </main>

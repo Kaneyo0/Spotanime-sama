@@ -79,26 +79,39 @@ const store = {
 
     async fetchArtist(id) {
         try {
-            let artist;
             let albumId;
-            await fetch(`${API.ARTISTS}/${id}`)
-                .then((response) => response.json())
-                .then((data) => {
-                    for (let index = 0; index < data.albums.length; index++) {
-                        albumId = data.albums[index].split('/')[7];
-                        Promise.resolve(this.fetchAlbum(albumId)).then((value) => {
-                            data.albums[index] = value;
-                        });
-                    }
-                    artist = data;
-                });
-            console.log("artiste récupéré");
+            const response = await fetch(`${API.ARTISTS}/${id}`)
+            const data = await response.json();
+
+            const artist = {
+                ...data,
+                albums: []
+            };
+
+            const promises = [];
+
+            for (const currentData of data.albums) {
+                albumId = currentData.split('/')[7];
+                promises.push(this.fetchAlbum(albumId)
+                    .then(album => {
+                        artist.albums.push(album);
+                    })
+                )
+            }
+
+            await Promise.all(promises);
+
             return artist;
         } catch (error) {
             console.error(error);
         }
     },
 
+    /**
+     * 
+     * @param {*} id 
+     * @returns {Promise<*>}
+     */
     async fetchAlbum(id) {
         try {
             let album;
