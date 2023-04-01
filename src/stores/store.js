@@ -1,6 +1,7 @@
 const API = {
     PLAYLISTS: "https://mmi.unilim.fr/~morap01/L250/public/index.php/api/playlists/",
     ALBUMS: "https://mmi.unilim.fr/~morap01/L250/public/index.php/api/albums",
+    ARTISTS: "https://mmi.unilim.fr/~morap01/L250/public/index.php/api/artists",
     SONGS: "https://mmi.unilim.fr/~morap01/L250/public/index.php/api/songs"
 }
 
@@ -15,6 +16,11 @@ const store = {
             items: [],
             detailRoute: '/albums'
         },
+        artists: {
+            title: 'Artistes les plus écoutés',
+            items: [],
+            detailRoute: '/artists'
+        },
         songs: {
             title: 'Titres les plus écoutés',
             items: [],
@@ -25,7 +31,7 @@ const store = {
     async fetchMostPlayedSong() {
         try {
             const response = await fetch(`${API.SONGS}?page=1`);
-            const songs = await response.json();
+            let songs = await response.json();
             this.setMusicListImages(songs);
             return songs;
         } catch (error) {
@@ -33,14 +39,20 @@ const store = {
         }
     },
 
-    async fetchMostAlbumListen() {
+    async fetchMostListenedArtist() {
+        try {
+            const response = await fetch(`${API.ARTISTS}?page=1`);
+            let artists = await response.json();
+            return artists;
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
+    async fetchMostListenedAlbum() {
         try {
             const response = await fetch(`${API.ALBUMS}?page=1`);
             let albums = await response.json();
-            for(let album of albums) {
-                const detailResponse = await fetch(`${API.ALBUMS}/${album.id}`);
-                album = await detailResponse.json();
-            }
             return albums;
         } catch (error) {
             console.error(error);
@@ -60,6 +72,28 @@ const store = {
         try {
             let response = await fetch(`${API.SONGS}/${id}`);
             return await response.json();
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
+    async fetchArtist(id) {
+        try {
+            let artist;
+            let albumId;
+            await fetch(`${API.ARTISTS}/${id}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    for (let index = 0; index < data.albums.length; index++) {
+                        albumId = data.albums[index].split('/')[7];
+                        Promise.resolve(this.fetchAlbum(albumId)).then((value) => {
+                            data.albums[index] = value;
+                        });
+                    }
+                    artist = data;
+                });
+            console.log("artiste récupéré");
+            return artist;
         } catch (error) {
             console.error(error);
         }
@@ -94,7 +128,10 @@ const store = {
             this.fetchMostPlayedSong().then(result => {
                 this.list.songs.items = result
             }),
-            this.fetchMostAlbumListen().then(result => {
+            this.fetchMostListenedArtist().then(result => {
+                this.list.artists.items = result
+            }),
+            this.fetchMostListenedAlbum().then(result => {
                 this.list.albums.items = result
             })
         ]);

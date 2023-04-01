@@ -31,11 +31,11 @@
 </script>
 
 <template>
-    <RouterLink :to="`${detailRoute}/${id}`">
-        <div :data-id="id" class="card">
-            <img class="card__playlist-add" :src="this.playlistSvg" v-show="isSongCard">
+    <div class="card__bloc">
+        <img class="card__playlist-add" :src="this.playlistSvg" v-show="isSongCard">
+        <RouterLink :to="`${detailRoute}/${id}`" :data-id="id" class="card">
             <img :src="image" alt="card image" class="card__image">
             <h1 class="card__title">{{ title }}</h1>
-        </div>
-    </RouterLink>
+        </RouterLink>
+    </div>
 </template>
