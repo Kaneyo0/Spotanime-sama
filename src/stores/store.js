@@ -32,7 +32,7 @@ const store = {
         try {
             const response = await fetch(`${API.SONGS}?page=1`);
             let songs = await response.json();
-            this.setMusicListImages(songs);
+            songs = this.setMusicListImages(songs);
             return songs;
         } catch (error) {
             console.error(error);
@@ -42,7 +42,17 @@ const store = {
     async fetchMostListenedArtist() {
         try {
             const response = await fetch(`${API.ARTISTS}?page=1`);
-            let artists = await response.json();
+            const data = await response.json();
+            const artists = [];
+
+            for (const currentData of data) {
+                artists.push({
+                    ...currentData,
+                    title: currentData.name,
+                    image: ''
+                });
+            }
+
             return artists;
         } catch (error) {
             console.error(error);
@@ -80,15 +90,13 @@ const store = {
     async fetchArtist(id) {
         try {
             let albumId;
-            const response = await fetch(`${API.ARTISTS}/${id}`)
+            const response = await fetch(`${API.ARTISTS}/${id}`);
             const data = await response.json();
-
+            const promises = [];
             const artist = {
                 ...data,
                 albums: []
             };
-
-            const promises = [];
 
             for (const currentData of data.albums) {
                 albumId = currentData.split('/')[7];
@@ -96,7 +104,7 @@ const store = {
                     .then(album => {
                         artist.albums.push(album);
                     })
-                )
+                );
             }
 
             await Promise.all(promises);
@@ -114,13 +122,17 @@ const store = {
      */
     async fetchAlbum(id) {
         try {
-            let album;
-            await fetch(`${API.ALBUMS}/${id}`)
-                .then((response) => response.json())
-                .then((data) => {
-                    this.setMusicListImages(data.songs);
-                    album = data;
-                });
+            const response = await fetch(`${API.ALBUMS}/${id}`);
+            const data = await response.json();
+            const album = {
+                ...data,
+                songs: []
+            };
+            
+            this.setMusicListImages(data.songs).then(songs => {
+                album.songs = songs;
+            });
+
             return album;
         } catch (error) {
             console.error(error);
@@ -156,6 +168,8 @@ const store = {
             // url permettant de récupérer les miniatures des vidéos youtube à partir de l'id de la vidéo
             song.image = `https://img.youtube.com/vi/${songId}/0.jpg`;
         }
+
+        return musicList;
     },
     
     add (songId) {

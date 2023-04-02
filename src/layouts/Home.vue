@@ -19,9 +19,9 @@
             document.querySelector("[data-name='songs']").addEventListener('click', (ev) => {
                 if(ev.target.classList.contains('card__playlist-add')) {
                     const card = ev.target.closest('.card');
-                    this.store.add(card.dataset.id)
+                    this.store.add(card.dataset.id);
                 }
-            })
+            });
         }
     }
 </script>

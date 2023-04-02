@@ -25,7 +25,7 @@
             }
         },
         mounted() {
-            console.log(this.detailRoute)
+            console.log(this.detailRoute);
         }
     }
 </script>
@@ -34,7 +34,7 @@
     <div class="card__bloc">
         <img class="card__playlist-add" :src="this.playlistSvg" v-show="isSongCard">
         <RouterLink :to="`${detailRoute}/${id}`" :data-id="id" class="card">
-            <img :src="image" alt="card image" class="card__image">
+            <img :src="image" alt="card image" class="card__image" v-show="image != ''">
             <h1 class="card__title">{{ title }}</h1>
         </RouterLink>
     </div>
