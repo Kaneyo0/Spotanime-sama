@@ -1,6 +1,6 @@
 <script>
     import Card from './Card.vue';
-    import store from '../stores/store';
+
     export default {
         props: {
             cards: {

@@ -26,18 +26,25 @@
             color: var(--clr-light-mute)
         }
     }
-    &__results-list {
+    &__search-bar:focus ~ &__results-list {
         display: flex;
-        justify-content: center;
+    }
+    &__results-list {
+        z-index: 1;
+        display: none;
+        flex-direction: column;
+        box-shadow: 0 5px 10px black;
         position: absolute;
         list-style: none;
-        width: 100%;
         top: var(--header-height);
         max-height: 20rem;
         padding: 0;
         margin: 0;
+        overflow-y: scroll;
     }
     &__search-result {
+        display: block;
+        text-decoration: none;
         width: var(--search-width);
         padding: 1rem 2rem;
         background-color: var(--clr-card-main);

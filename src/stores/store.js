@@ -152,7 +152,7 @@ const store = {
 
     async fetchResearch(research) {
         try {
-            const response = await fetch(`${API.SONGS}?page=&title=${research}`);
+            const response = await fetch(`${API.SONGS}?page=1&title=${research}`);
             let songs = await response.json();
             // songs = this.setMusicListImages(songs);
             return songs;
@@ -184,6 +184,7 @@ const store = {
 
         return musicList;
     },
+
     addPlaylist (songId) {
         const playListstorage = JSON.parse(localStorage.getItem('playlist')) || [];
         if(!playListstorage.includes(songId)) {
