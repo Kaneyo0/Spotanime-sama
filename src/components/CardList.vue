@@ -1,6 +1,6 @@
 <script>
     import Card from './Card.vue';
-
+    import store from '../stores/store';
     export default {
         props: {
             cards: {
@@ -20,6 +20,14 @@
                 type: String
             }
         },
+        methods: {
+            addSongToPlaylist(ev) {
+                if(ev.target.classList.contains('card__playlist-add')) {
+                    const card = ev.target.nextSibling;
+                    this.$emit('addSongToPlaylist', card.dataset);
+                }
+            },
+        },
         components: {
             Card
         }
@@ -29,7 +37,12 @@
 <template>
     <article class="card__list__container">
         <h3 class="card__list__title">{{ title }}</h3>
-        <ul class="card__list" :data-name="name">
+        <ul v-if="isSongList" @click="addSongToPlaylist" class="card__list" :data-listName="name">
+            <li class="card__list__item" v-for="(card) in cards">
+                <Card :detailRoute="detailRoute" :isSongCard="isSongList" :id="card.id" :title="card.title" :image="card.image"/>
+            </li>
+        </ul>
+        <ul v-else class="card__list" :data-listName="name">
             <li class="card__list__item" v-for="(card) in cards">
                 <Card :detailRoute="detailRoute" :isSongCard="isSongList" :id="card.id" :title="card.title" :image="card.image"/>
             </li>

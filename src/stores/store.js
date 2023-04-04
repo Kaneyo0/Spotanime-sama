@@ -6,10 +6,12 @@ const API = {
 }
 
 const store = {
+    clickedSong: Object,
     list: {
         playlist: {
             title: 'Mes playlist',
-            items: []
+            items: [],
+            detailRoute: '/playlists'
         },
         albums: {
             title: 'Album en tendance',
@@ -182,11 +184,12 @@ const store = {
 
         return musicList;
     },
-    
-    add (songId) {
+    addPlaylist (songId) {
         const playListstorage = JSON.parse(localStorage.getItem('playlist')) || [];
         if(!playListstorage.includes(songId)) {
+            console.log(this.list.songs)
             playListstorage.push(songId);
+            this.list.playlist.items.push(songId);
             localStorage.setItem('playlist', JSON.stringify(playListstorage))
         } 
     }

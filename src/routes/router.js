@@ -22,6 +22,11 @@ const router = createRouter({
             path: '/songs/:id',
             name: 'song details',
             component: () => import('../layouts/Details.vue')
+        },
+        {
+            path: '/playlists/:id',
+            name: 'playlists details',
+            component: () => import('../layouts/Details.vue')
         }
     ]
 });
