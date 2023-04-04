@@ -1,8 +1,17 @@
 
-.container__lists {
-    display: flex;
-    flex-direction: column;
-    list-style: none;
-    padding: 0;
-    gap: 2rem;
+.container {
+    background-color: var(--clr-black-light);
+    overflow-y: auto;
+    height: var(--main-height);
+    position: relative;
+    &__lists {
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+        padding: 0;
+        gap: 2rem;
+        &.blur {
+            filter: blur(2px);
+        }
+    }
 }
