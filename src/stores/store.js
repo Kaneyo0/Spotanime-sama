@@ -148,6 +148,17 @@ const store = {
         }
     },
 
+    async fetchResearch(research) {
+        try {
+            const response = await fetch(`${API.SONGS}?page=&title=${research}`);
+            let songs = await response.json();
+            // songs = this.setMusicListImages(songs);
+            return songs;
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
     async initialize() {
         await Promise.all([
             this.fetchMostPlayedSong().then(result => {
