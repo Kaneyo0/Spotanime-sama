@@ -30,9 +30,11 @@ const store = {
         }
     },
 
-    async fetchMostPlayedSong() {
+    async fetchMostPlayedSong(title = "") {
         try {
-            const response = await fetch(`${API.SONGS}?page=1`);
+            let request = `${API.SONGS}?page=1`;
+            if (title) request = `${API.SONGS}?page=1&title=${title}`;
+            const response = await fetch(request);
             let songs = await response.json();
             songs = this.setMusicListImages(songs);
             return songs;
@@ -41,9 +43,11 @@ const store = {
         }
     },
 
-    async fetchMostListenedArtist() {
+    async fetchMostListenedArtist(name = "") {
         try {
-            const response = await fetch(`${API.ARTISTS}?page=1`);
+            let request = `${API.ARTISTS}?page=1`;
+            if (name) request = `${API.ARTISTS}?page=1&title=${name}`;
+            const response = await fetch(request);
             const data = await response.json();
             const artists = [];
 
@@ -61,9 +65,11 @@ const store = {
         }
     },
 
-    async fetchMostListenedAlbum() {
+    async fetchMostListenedAlbum(title = "") {
         try {
-            const response = await fetch(`${API.ALBUMS}?page=1`);
+            let request = `${API.ALBUMS}?page=1`;
+            if (title) request = `${API.ALBUMS}?page=1&title=${title}`;
+            const response = await fetch(request);
             let albums = await response.json();
             return albums;
         } catch (error) {
@@ -152,10 +158,25 @@ const store = {
 
     async fetchResearch(research) {
         try {
-            const response = await fetch(`${API.SONGS}?page=1&title=${research}`);
-            let songs = await response.json();
-            // songs = this.setMusicListImages(songs);
-            return songs;
+            const searchResult = {
+                songs: [],
+                albums: [],
+                artists: []
+            };
+
+            await Promise.all([
+                this.fetchMostPlayedSong(research).then(result => {
+                    searchResult.songs = result;
+                }),
+                this.fetchMostListenedAlbum(research).then(result => {
+                    searchResult.albums = result;
+                }),
+                this.fetchMostListenedArtist(research).then(result => {
+                    searchResult.artists = result;
+                })
+            ]);
+
+            return searchResult;
         } catch (error) {
             console.error(error);
         }
