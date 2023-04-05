@@ -312,6 +312,7 @@ body::-webkit-scrollbar {
   display: flex;
   align-items: center;
   gap: 1rem;
+  justify-content: space-between;
 }
 
 .container {
