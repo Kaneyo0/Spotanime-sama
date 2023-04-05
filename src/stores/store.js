@@ -76,7 +76,7 @@ const store = {
         for(const idPlaylist of localStorage.getItem('playlists')) {
             this.playlists.push(
                 await fetchPlaylist(idPlaylist)
-            )
+            );
         }
     },
 
@@ -164,13 +164,13 @@ const store = {
     async initialize() {
         await Promise.all([
             this.fetchMostPlayedSong().then(result => {
-                this.list.songs.items = result
+                this.list.songs.items = result;
             }),
             this.fetchMostListenedArtist().then(result => {
-                this.list.artists.items = result
+                this.list.artists.items = result;
             }),
             this.fetchMostListenedAlbum().then(result => {
-                this.list.albums.items = result
+                this.list.albums.items = result;
             })
         ]);
     },

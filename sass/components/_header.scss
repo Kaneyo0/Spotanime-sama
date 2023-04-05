@@ -42,6 +42,9 @@
         margin: 0;
         overflow-y: scroll;
     }
+    &__results-list:hover {
+        display: flex;
+    }
     &__search-result {
         display: block;
         text-decoration: none;

@@ -245,6 +245,9 @@ body::-webkit-scrollbar {
   margin: 0;
   overflow-y: scroll;
 }
+.header__results-list:hover {
+  display: flex;
+}
 .header__search-result {
   display: block;
   text-decoration: none;
