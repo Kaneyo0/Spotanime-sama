@@ -33,7 +33,7 @@
         <h1 class="form-playlist__title">Enregistrer dans</h1>
         <ul v-if="this.store.list.playlist.items.length > 0" class="form-playlist__list">
             <li v-for="playlist in store.list.playlist.items">
-                <InlineCard :id="playlist.id" :title="playlist.title" :edited="playlist.edited"></InlineCard>
+                <InlineCard :id="playlist.id" :title="playlist.title"></InlineCard>
             </li>
         </ul>
         <i class="form-playlist__add material-symbols-outlined" @click="addPlaylist">
