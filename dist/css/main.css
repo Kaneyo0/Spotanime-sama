@@ -232,11 +232,6 @@ body::-webkit-scrollbar {
 .header__search-bar:focus ~ .header__results-list {
   display: flex;
 }
-.header__result-title {
-  width: var(--search-width);
-  background-color: var(--clr-card-list);
-  text-transform: uppercase;
-}
 .header__results-list {
   z-index: 1;
   display: none;

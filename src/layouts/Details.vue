@@ -39,10 +39,10 @@
             <p>{{ this.song.title }}</p>
         </div>
         <div v-else-if="this.$route.name == 'artist details'" class="artist__detail">
-            <CardList :detailRoute="store.list.albums.detailRoute" :name="'albums'" :isSongList="name === 'songs'" :title="this.artist.name" :cards="this.artist.albums"></CardList>
+            <CardList :detailRoute="store.list.albums.detailRoute" :name="'albums'" :isSongList="false" :title="this.artist.name" :cards="this.artist.albums"></CardList>
         </div>
         <div v-else-if="this.$route.name == 'album details'" class="album__detail">
-            <CardList :detailRoute="store.list.songs.detailRoute" :name="'songs'" :isSongList="name === 'songs'" :title="this.album.title" :cards="this.album.songs"></CardList>
+            <CardList :detailRoute="store.list.songs.detailRoute" :name="'songs'" :isSongList="true" :title="this.album.title" :cards="this.album.songs"></CardList>
         </div>
         <div v-else class="default">
             <h1> Il n'y a rien ici </h1>

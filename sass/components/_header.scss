@@ -29,6 +29,11 @@
     &__search-bar:focus ~ &__results-list {
         display: flex;
     }
+    &__result-title {
+        width: var(--search-width);
+        background-color: var(--clr-card-list);
+        text-transform: uppercase;
+    }
     &__results-list {
         z-index: 1;
         display: none;
@@ -41,6 +46,9 @@
         padding: 0;
         margin: 0;
         overflow-y: scroll;
+    }
+    &__results-list:hover {
+        display: flex;
     }
     &__search-result {
         display: block;

@@ -16,6 +16,6 @@
 
 <template>
     <li>
-        <RouterLink :to="`${detailRoute}/${id}`" :data-id="id" :data-title="title"  class="header__search-result"> {{ value }} </RouterLink> 
+        <RouterLink :to="`${detailRoute}/${id}`" :data-id="id" :data-title="value" class="header__search-result"> {{ value }} </RouterLink> 
     </li>
 </template>
