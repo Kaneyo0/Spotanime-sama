@@ -25,7 +25,7 @@ const router = createRouter({
         },
         {
             path: '/playlists/:id',
-            name: 'playlists details',
+            name: 'playlist details',
             component: () => import('../layouts/Details.vue')
         }
     ]

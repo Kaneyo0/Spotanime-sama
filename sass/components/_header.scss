@@ -30,9 +30,11 @@
         display: flex;
     }
     &__result-title {
+        padding: 0.5rem 1rem;
         width: var(--search-width);
         background-color: var(--clr-card-list);
         text-transform: uppercase;
+        font-style: italic;
     }
     &__results-list {
         z-index: 1;
@@ -42,10 +44,10 @@
         position: absolute;
         list-style: none;
         top: var(--header-height);
-        max-height: 20rem;
+        //max-height: 20rem;
         padding: 0;
         margin: 0;
-        overflow-y: scroll;
+        overflow-y: auto;
     }
     &__results-list:hover {
         display: flex;
@@ -53,9 +55,13 @@
     &__search-result {
         display: block;
         text-decoration: none;
+        color: var(--clr-light-mute);
         width: var(--search-width);
         padding: 1rem 2rem;
         background-color: var(--clr-card-main);
+    }
+    &__search-result:hover {
+        background-color: var(--clr-card-main-hover);
     }
     &__link {
         position: absolute;
