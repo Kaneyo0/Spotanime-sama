@@ -5,5 +5,5 @@
 
 <template>
     <Header></Header>
-    <RouterView></RouterView>
+    <RouterView :key="$route.fullPath"></RouterView>
 </template>
