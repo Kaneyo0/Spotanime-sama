@@ -7,22 +7,12 @@
         name: "App",
         data() {
             return {
-                store: store,
-                showPlaylistForm: false
+                store: store
             }
         },
         components: {
             CardList,
             PlaylistForm
-        },
-        methods: {
-            showForm(selectedSong) {
-                if(!this.showPlaylistForm) {
-                    this.store.clickedSong = selectedSong;
-                    this.showPlaylistForm = true;
-                    document.querySelector('.container__lists').classList.add('blur');
-                }
-            }
         },
         async created() {
             await this.store.initialize();
@@ -32,7 +22,7 @@
 
 <template>
     <main class="container">
-        <PlaylistForm v-show="showPlaylistForm"></PlaylistForm>
+        <PlaylistForm v-show="store.showPlaylistForm"></PlaylistForm>
         <ul class="container__lists">
             <li class="container__lists__item" v-for="(list, name) in store.list">
                 <CardList
@@ -41,8 +31,7 @@
                     :name="name"
                     :isSongList="name === 'songs'"
                     :title="list.title"
-                    :cards="list.items"
-                    @addSongToPlaylist="showForm">
+                    :cards="list.items">
                 </CardList>
             </li>
         </ul>

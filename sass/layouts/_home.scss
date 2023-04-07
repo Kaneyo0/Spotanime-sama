@@ -10,8 +10,9 @@
         list-style: none;
         padding: 0;
         gap: 2rem;
+        transition: filter .2s;
         &.blur {
-            filter: blur(2px);
+           filter: blur(2px)
         }
     }
 }

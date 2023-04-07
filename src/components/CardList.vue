@@ -1,6 +1,6 @@
 <script>
     import Card from './Card.vue';
-
+    import store from '../stores/store';
     export default {
         props: {
             cards: {
@@ -20,11 +20,18 @@
                 type: String
             }
         },
+        data() {
+            return {
+                store: store
+            }
+        },
         methods: {
             addSongToPlaylist(ev) {
                 if(ev.target.classList.contains('card__playlist-add')) {
-                    const card = ev.target.nextSibling;
-                    this.$emit('addSongToPlaylist', card.dataset);
+                    const domCard = ev.target.nextSibling;
+                    const card = this.cards.find((card) => card.id === parseInt(domCard.dataset.id));
+                    this.store.clickedSong = card;
+                    this.store.showForm()
                 }
             },
         },
