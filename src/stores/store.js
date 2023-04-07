@@ -44,7 +44,7 @@ const store = {
                 this.list.albums.items = result;
             }),
             this.fetchPlaylists().then(result => {
-                this.list.playlist.items = result
+                this.list.playlist.items = result || []
             })
         ]);
     },

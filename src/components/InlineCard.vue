@@ -4,53 +4,48 @@
         props: {
             id: {
                 type: Number
+            },
+            edited: {
+                type: Boolean,
+                default: false
+            },
+            title: {
+                type: String,
+                default: 'Ma playlist'
+            },
+            image: {
+                type: String,
+                default: 'none'
+            },
+            songs: {
+                type: Array,
+                default: []
+            }
+        },
+        computed: {
+            toBodyRequest() {
+                return { 
+                    id: this.id,
+                    edited: this.edited,
+                    title: this.title,
+                    image: this.image,
+                    songs: this.songs,
+                    toJSON() {
+                        delete this.edited
+                        return this;
+                    }
+                }
+            }
+        },
+        methods: {
+            updateTitle(ev) {
+                this.toBodyRequest.title = ev.target.value
+                this.$emit('updateTitle', this.toBodyRequest)
             }
         },
         data() {
             return {
-                edited: true,
-                title: 'Ma playlist',
-                image: 'none',
-                store: store,
-                songs: []
-            }
-        },
-        computed: {
-            toObject() {
-                return { id: this.id, title: this.title, image: this.image, songs: this.songs };
-            }
-        },
-        methods: {
-            toggleEdit() {
-                this.edited = !this.edited
-                if (!this.edited) {
-                    this.upsertPlaylist()
-                }
-            },
-            updateTitle(ev) {
-                this.title = ev.target.value;
-                this.upsertPlaylist()
-                this.edited = false;         
-            },
-            upsertPlaylist() {
-                let index = this.store.list.playlist.items.findIndex((playlist) => playlist.id === this.id);
-                if(index === -1) {
-                    this.store.list.playlist.items.push(this.toObject);
-                } else {
-                    this.store.list.playlist.items[index] = this.toObject
-                }
-                localStorage.setItem('playlists', JSON.stringify(this.store.list.playlist.items));
-            },
-            addSong(ev) {
-                if(ev.target.className.includes('inline-card')) {
-                    if(!this.songs.some(song => song.id === this.store.clickedSong.id)) {
-                        this.songs.push(this.store.clickedSong);
-                        this.upsertPlaylist();
-                    }
-            
-                    this.store.hideForm();
-                }
-            
+                store: store
             }
         }
     }
@@ -59,12 +54,12 @@
     <div :data-id=id class="inline-card" v-if="!edited" @click="addSong">
         <img :src="image" class="inline-card__img">
         <p class="inline-card__title"> {{ title }}</p>
-        <i class="material-symbols-outlined" @click="toggleEdit">edit</i>
+        <i class="material-symbols-outlined" @click="$emit('toggleEdit', this.toBodyRequest)">edit</i>
         <i class="material-symbols-outlined">delete</i>
     </div>
     <div :data-id=id class="inline-card" v-else>
         <img :src="image" class="inline-card__img">
         <input type="text" class="inline-card__title" :value="title" @change="updateTitle"> 
-        <i class="material-symbols-outlined" @click="toggleEdit">done</i>
+        <i class="material-symbols-outlined" @click="$emit('toggleEdit', this.toBodyRequest)">done</i>
     </div>
 </template>
