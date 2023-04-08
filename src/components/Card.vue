@@ -14,7 +14,7 @@
             },
             image: {
                 type: String,
-                default: "none" // default value to remove the automatic border which is add by chrome when the src attribute is empty
+                default: "/assets/playlist.svg" // default value to remove the automatic border which is add by chrome when the src attribute is empty
             },
             isSongCard: {
                 type: Boolean,

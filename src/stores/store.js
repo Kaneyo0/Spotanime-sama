@@ -1,5 +1,5 @@
 const API = {
-    PLAYLISTS: "https://mmi.unilim.fr/~morap01/L250/public/index.php/api/playlists/",
+    PLAYLISTS: "https://mmi.unilim.fr/~morap01/L250/public/index.php/api/playlists",
     ALBUMS: "https://mmi.unilim.fr/~morap01/L250/public/index.php/api/albums",
     ARTISTS: "https://mmi.unilim.fr/~morap01/L250/public/index.php/api/artists",
     SONGS: "https://mmi.unilim.fr/~morap01/L250/public/index.php/api/songs"
@@ -8,7 +8,7 @@ const API = {
 const store = {
     clickedSong: Object,
     showPlaylistForm: false,
-
+    playlistIRI: '/~morap01/L250/public/index.php/api/songs',
     list: {
         playlist: {
             title: 'Mes playlist',
@@ -61,6 +61,15 @@ const store = {
             console.error(error);
         }
     },
+
+    async fetchSong(id) {
+        try {
+            let response = await fetch(`${API.SONGS}/${id}`);
+            return await response.json();
+        } catch (error) {
+            console.error(error);
+        }
+    },
     
     async fetchMostListenedArtist(name = "") {
         try {
@@ -84,47 +93,6 @@ const store = {
         }
     },
     
-    async fetchMostListenedAlbum(title = "") {
-        try {
-            let request = `${API.ALBUMS}?page=1`;
-            if (title) request = `${API.ALBUMS}?page=1&title=${title}`;
-            const response = await fetch(request);
-            let albums = await response.json();
-            return albums;
-        } catch (error) {
-            console.error(error);
-        }
-    },
-    
-    async fetchPlaylists() {
-        return JSON.parse(localStorage.getItem('playlists'))
-        // TODO : stocker l'id des playlists dans le localstorage et les récupérer à partir de l'id
-        /* for(const idPlaylist of localStorage.getItem('playlists')) {
-            this.playlists.push(
-                await fetchPlaylist(idPlaylist)
-            );
-        } */
-    },
-    
-    /**
-     * 
-     * @param {Int} id 
-     * @returns {Promise<*>}
-     */
-    async fetchSong(id) {
-        try {
-            let response = await fetch(`${API.SONGS}/${id}`);
-            return await response.json();
-        } catch (error) {
-            console.error(error);
-        }
-    },
-    
-    /**
-     * 
-     * @param {Int} id 
-     * @returns {Promise<*>}
-     */
     async fetchArtist(id) {
         try {
             let albumId;
@@ -153,37 +121,83 @@ const store = {
         }
     },
     
-    /**
+    async fetchMostListenedAlbum(title = "") {
+        try {
+            let request = `${API.ALBUMS}?page=1`;
+            if (title) request = `${API.ALBUMS}?page=1&title=${title}`;
+            const response = await fetch(request);
+            let albums = await response.json();
+            return albums;
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
+        /**
      * 
      * @param {*} id 
      * @returns {Promise<*>}
     */
    async fetchAlbum(id) {
-       try {
-            const response = await fetch(`${API.ALBUMS}/${id}`);
-            const data = await response.json();
-            const album = {
-                ...data,
-                songs: []
-            };
+    try {
+         const response = await fetch(`${API.ALBUMS}/${id}`);
+         const data = await response.json();
+         const album = {
+             ...data,
+             songs: []
+         };
+         
+         this.setMusicListImages(data.songs).then(songs => {
+             album.songs = songs;
+         });
+         
+         return album;
+     } catch (error) {
+         console.error(error);
+     }
+ },
+ 
+    
+    async fetchPlaylists() {
+        const listId = JSON.parse(localStorage.getItem('playlistsId')) || [];
+        const playlists = [];
+        for(const id of listId) {
+            playlists.push(await this.fetchPlaylist(id))
+        }
+        return playlists
+    },
+    
+    async fetchPlaylist(playlistId) {
+        try {
+            let response = await fetch(`${API.PLAYLISTS}/${playlistId}`);
+            const { name: title, songs, id} = await response.json()
             
-            this.setMusicListImages(data.songs).then(songs => {
-                album.songs = songs;
-            });
-            
-            return album;
+            return { id, title, songs};
         } catch (error) {
             console.error(error);
         }
     },
-    
-    async fetchPlaylist(id) {
-        try {
-            let response = await fetch(`${API.PLAYLISTS}/${id}`);
-            return await response.json();
-        } catch (error) {
-            console.error(error);
-        }
+
+    async insertPlaylist(playlistData) {
+        const response = await fetch(`${API.PLAYLISTS}`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(playlistData)
+        });
+        const { id } = await response.json();
+        return id;
+    },
+
+    async patchPlaylist(playlistData) {
+        await fetch(`${API.PLAYLISTS}/${playlistData.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(playlistData)
+        });
     },
     
     async fetchResearch(research) {
@@ -223,6 +237,7 @@ const store = {
         return musicList;
     },
     
+<<<<<<< HEAD
     addPlaylist(songId) {
         const playListstorage = JSON.parse(localStorage.getItem('playlist')) || [];
         if(!playListstorage.includes(songId)) {
@@ -233,16 +248,18 @@ const store = {
         } 
     },
     
+=======
+>>>>>>> 35fc8b227da0b8c111543f2ec3ef7080acfbaa6a
     showForm() {
         if(!this.showPlaylistForm) {
             this.showPlaylistForm = true;
-            document.querySelector('.container__lists').classList.add('blur');
+            document.querySelector('.container__lists')?.classList.add('blur');
         }
     },
 
     hideForm() {
         this.showPlaylistForm = false;
-        document.querySelector('.container__lists').classList.remove('blur');
+        document.querySelector('.container__lists')?.classList.remove('blur');
     }
 }
 
