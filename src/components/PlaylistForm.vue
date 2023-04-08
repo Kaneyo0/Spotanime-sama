@@ -14,57 +14,44 @@
             }
         },
         methods: {
-            addLocalPlaylist(data = { id: Date.now(), edited: true }) {
+            addLocalPlaylist(data = { edited: true }) {
                 this.localPlaylists.push(data)
             },
             toggleEdit(playlistData) {
-                const playlist = this.store.list.playlist.items.find((playlist) => playlist.id === playlistData.id);
+                const playlist = this.existingPlaylists.find((playlist) => playlist.id === playlistData.id);
                 playlist.edited = !playlist.edited
                 if (!playlist.edited) {
                     this.upsertPlaylist(playlistData)
                 }
             },
-            updateTitle(playlistData) {
-                // 
-                this.upsertPlaylist(playlistData)
-                // playlist.edited = false;         
-            },
-            upsertPlaylist(playlistData) {
-                // check if playlist already exists
+            async upsertPlaylist(playlistData) {
+                // check if playlist already exists on the api (all playlist in the store are on the api)
                 let index = this.store.list.playlist.items.findIndex((item) => item.id === playlistData.id);
                 if(index === -1) {
+                    playlistData.id = await this.store.insertPlaylist(playlistData)
+
                     // if not, we put it in the store to update all list which referer to the new playlist
                     this.store.list.playlist.items.push(playlistData);
                     // we remove playlist from local playlists
                     let localIndex = this.localPlaylists.findIndex((item) => item.id === playlistData.id);
                     this.localPlaylists.splice(localIndex, 1);
+                    localStorage.setItem('playlistsId', JSON.stringify(this.store.list.playlist.items.map(playlist => playlist.id)))    
                 } else {
-                    /* let inlineCard = this.localPlaylists.find((playlist) => playlist.id === playlistData.id);
-                    inlineCard = playlistData; */
-                    this.store.list.playlist.items[index] = playlistData
+                    this.store.list.playlist.items[index] = { ...playlistData, title: playlistData.name };
+                    this.store.patchPlaylist(playlistData);
+                    this.existingPlaylists[index].edited = false;
                 }
-                console.log(this.store.list.playlist.items)
-                localStorage.setItem('playlists', JSON.stringify(this.store.list.playlist.items));
             },
-            addSong(ev) {
-                if(ev.target.className.includes('inline-card')) {
-                    if(!this.songs.some(song => song.id === this.store.clickedSong.id)) {
-                        this.songs.push(this.store.clickedSong);
-                        this.upsertPlaylist();
-                    }
-            
-                    this.store.hideForm();
+            addSong(playlistData) {
+                if(!playlistData.songs.some(song => song === this.store.clickedSong)) {
+                    playlistData.songs.push(this.store.clickedSong);
+                    this.upsertPlaylist(playlistData);
                 }
-            
+                this.store.hideForm();
             }
         },
         components: {
             InlineCard
-        },
-        mounted() {
-            for (const playlist in this.localPlaylists) {
-                this.addLocalPlaylist(playlist)
-            }
         }
     }
 </script>
@@ -84,7 +71,8 @@
                     :songs="playlist.song"
                     :image="playlist.image"
                     @toggleEdit="toggleEdit"
-                    @updateTitle="updateTitle"
+                    @updateTitle="upsertPlaylist"
+                    @add-song="addSong"
                 ></InlineCard>
             </li>
         </ul>

@@ -30,7 +30,7 @@
                 if(ev.target.classList.contains('card__playlist-add')) {
                     const domCard = ev.target.nextSibling;
                     const card = this.cards.find((card) => card.id === parseInt(domCard.dataset.id));
-                    this.store.clickedSong = card;
+                    this.store.clickedSong = `${this.store.playlistIRI}/${card.id}`;
                     this.store.showForm()
                 }
             },

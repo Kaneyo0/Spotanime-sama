@@ -15,7 +15,7 @@
             },
             image: {
                 type: String,
-                default: 'none'
+                default: '/assets/playlist.svg'
             },
             songs: {
                 type: Array,
@@ -27,7 +27,7 @@
                 return { 
                     id: this.id,
                     edited: this.edited,
-                    title: this.title,
+                    name: this.title,
                     image: this.image,
                     songs: this.songs,
                     toJSON() {
@@ -39,8 +39,13 @@
         },
         methods: {
             updateTitle(ev) {
-                this.toBodyRequest.title = ev.target.value
+                this.toBodyRequest.name = ev.target.value
                 this.$emit('updateTitle', this.toBodyRequest)
+            },
+            addSong(ev) {
+                if(ev.target.className.includes('inline-card')) {
+                    this.$emit('add-song', this.toBodyRequest)
+                }
             }
         },
         data() {
