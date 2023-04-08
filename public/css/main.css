@@ -165,6 +165,9 @@ body::-webkit-scrollbar {
   padding-top: 1rem;
   background-color: var(--clr-card-list);
   border-radius: 10px;
+  /* Firefox scrollbar */
+  scrollbar-color: var(--clr-card-main) rgba(0, 0, 0, 0);
+  scrollbar-width: thin;
   /* width */
   /* Track */
   /* Handle */
@@ -234,19 +237,19 @@ body::-webkit-scrollbar {
 }
 .header__result-title {
   padding: 0.5rem 1rem;
-  width: var(--search-width);
   background-color: var(--clr-card-list);
   text-transform: uppercase;
   font-style: italic;
 }
 .header__results-list {
-  z-index: 1;
+  z-index: 10;
   display: none;
   flex-direction: column;
   box-shadow: 0 5px 10px black;
   position: absolute;
   list-style: none;
   top: var(--header-height);
+  max-height: 30rem;
   padding: 0;
   margin: 0;
   overflow-y: auto;
@@ -258,7 +261,6 @@ body::-webkit-scrollbar {
   display: block;
   text-decoration: none;
   color: var(--clr-light-mute);
-  width: var(--search-width);
   padding: 1rem 2rem;
   background-color: var(--clr-card-main);
 }
@@ -348,6 +350,24 @@ body::-webkit-scrollbar {
 }
 .inline-card__img:hover, .inline-card__title:hover {
   transform: scale(1.1);
+}
+
+.detail__song {
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.detail__song-title {
+  padding: 1rem;
+  color: var(--clr-light-mute);
+  font-size: 1.5rem;
+  text-transform: uppercase;
+}
+.detail__song-player {
+  width: 50rem;
+  height: 30rem;
 }
 
 .container {

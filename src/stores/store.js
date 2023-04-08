@@ -105,7 +105,12 @@ const store = {
             );
         } */
     },
-        
+    
+    /**
+     * 
+     * @param {Int} id 
+     * @returns {Promise<*>}
+     */
     async fetchSong(id) {
         try {
             let response = await fetch(`${API.SONGS}/${id}`);
@@ -115,6 +120,11 @@ const store = {
         }
     },
     
+    /**
+     * 
+     * @param {Int} id 
+     * @returns {Promise<*>}
+     */
     async fetchArtist(id) {
         try {
             let albumId;
@@ -129,9 +139,9 @@ const store = {
             for (const currentData of data.albums) {
                 albumId = currentData.split('/')[7];
                 promises.push(this.fetchAlbum(albumId)
-                .then(album => {
-                    artist.albums.push(album);
-                })
+                    .then(album => {
+                        artist.albums.push(album);
+                    })
                 );
             }
             
@@ -193,7 +203,8 @@ const store = {
                 }),
                 this.fetchMostListenedArtist(research).then(result => {
                     searchResult.artists = result;
-                })
+                }),
+                
             ]);
             
             return searchResult;
@@ -212,7 +223,7 @@ const store = {
         return musicList;
     },
     
-    addPlaylist (songId) {
+    addPlaylist(songId) {
         const playListstorage = JSON.parse(localStorage.getItem('playlist')) || [];
         if(!playListstorage.includes(songId)) {
             console.log(this.list.songs)
@@ -229,7 +240,7 @@ const store = {
         }
     },
 
-    hideForm () {
+    hideForm() {
         this.showPlaylistForm = false;
         document.querySelector('.container__lists').classList.remove('blur');
     }
