@@ -58,10 +58,18 @@
 <template>
     <div :data-id=id class="inline-card" v-if="!edited" @click="addSong">
         <img :src="image" class="inline-card__img">
-        <p class="inline-card__title"> {{ title }}</p>
+        <p class="inline-card__title">{{ title }}</p>
         <i class="material-symbols-outlined" @click="$emit('toggleEdit', this.toBodyRequest)">edit</i>
         <i class="material-symbols-outlined">delete</i>
     </div>
+    <!-- <div :data-id=id class="inline-card" v-if="!edited" @click="addSong">
+        <div class="inline-card__content__">
+            <img :src="image" class="inline-card__content__img">
+            <p class="inline-card__content__title">{{ title }}</p>
+        </div>
+        <i class="material-symbols-outlined" @click="$emit('toggleEdit', this.toBodyRequest)">edit</i>
+        <i class="material-symbols-outlined">delete</i>
+    </div> -->
     <div :data-id=id class="inline-card" v-else>
         <img :src="image" class="inline-card__img">
         <input type="text" class="inline-card__title" :value="title" @change="updateTitle"> 

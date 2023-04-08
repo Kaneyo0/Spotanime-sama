@@ -31,7 +31,8 @@
     <div class="card__bloc">
         <img class="card__playlist-add" :src="this.playlistSvg" v-show="isSongCard">
         <RouterLink :to="`${detailRoute}/${id}`" :data-id="id" :data-title="title" :data-image="image" class="card">
-            <img :src="image" alt="card image" class="card__image" v-show="image != ''">
+            <img v-if="image.includes(`/`)" :src="image" alt="card image" class="card__image" v-show="image != ''">
+            <span v-else class="material-symbols-outlined card__icon">{{ image }}</span>
             <h1 class="card__title">{{ title }}</h1>
         </RouterLink>
     </div>

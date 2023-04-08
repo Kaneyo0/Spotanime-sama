@@ -83,7 +83,7 @@ const store = {
                 artists.push({
                     ...currentData,
                     title: currentData.name,
-                    image: ''
+                    image: 'person'
                 });
             }
             
@@ -133,36 +133,38 @@ const store = {
         }
     },
 
-        /**
+    /**
      * 
      * @param {*} id 
      * @returns {Promise<*>}
     */
-   async fetchAlbum(id) {
-    try {
-         const response = await fetch(`${API.ALBUMS}/${id}`);
-         const data = await response.json();
-         const album = {
-             ...data,
-             songs: []
-         };
-         
-         this.setMusicListImages(data.songs).then(songs => {
-             album.songs = songs;
-         });
-         
-         return album;
-     } catch (error) {
-         console.error(error);
-     }
- },
- 
+    async fetchAlbum(id) {
+        try {
+            const response = await fetch(`${API.ALBUMS}/${id}`);
+            const data = await response.json();
+            const album = {
+                ...data,
+                songs: []
+            };
+            
+            this.setMusicListImages(data.songs).then(songs => {
+                album.songs = songs;
+            });
+            
+            return album;
+        } catch (error) {
+            console.error(error);
+        }
+    },
     
     async fetchPlaylists() {
         const listId = JSON.parse(localStorage.getItem('playlistsId')) || [];
         const playlists = [];
         for(const id of listId) {
-            playlists.push(await this.fetchPlaylist(id))
+            await this.fetchPlaylist(id).then(result => {
+                result.image = 'queue_music';
+                playlists.push(result);
+            });
         }
         return playlists
     },
@@ -170,9 +172,18 @@ const store = {
     async fetchPlaylist(playlistId) {
         try {
             let response = await fetch(`${API.PLAYLISTS}/${playlistId}`);
-            const { name: title, songs, id} = await response.json()
+            const data = await response.json();
+            const playlist = { 
+                id: data.id,
+                title: data.name, 
+                songs: [], 
+            }
+
+            this.setMusicListImages(data.songs).then(songs => {
+                playlist.songs = songs;
+            });
             
-            return { id, title, songs};
+            return playlist;
         } catch (error) {
             console.error(error);
         }
@@ -205,7 +216,8 @@ const store = {
             const searchResult = {
                 songs: [],
                 albums: [],
-                artists: []
+                artists: [],
+                playlists: []
             };
             
             await Promise.all([
@@ -218,7 +230,13 @@ const store = {
                 this.fetchMostListenedArtist(research).then(result => {
                     searchResult.artists = result;
                 }),
-                
+                this.fetchPlaylists().then(result => {
+                    result.forEach(playlist => {
+                        if (playlist.title.toLowerCase().includes(research.toLowerCase())) {
+                            searchResult.playlists.push(playlist);
+                        }
+                    });
+                })
             ]);
             
             return searchResult;
@@ -237,19 +255,6 @@ const store = {
         return musicList;
     },
     
-<<<<<<< HEAD
-    addPlaylist(songId) {
-        const playListstorage = JSON.parse(localStorage.getItem('playlist')) || [];
-        if(!playListstorage.includes(songId)) {
-            console.log(this.list.songs)
-            playListstorage.push(songId);
-            this.list.playlist.items.push(songId);
-            localStorage.setItem('playlist', JSON.stringify(playListstorage))
-        } 
-    },
-    
-=======
->>>>>>> 35fc8b227da0b8c111543f2ec3ef7080acfbaa6a
     showForm() {
         if(!this.showPlaylistForm) {
             this.showPlaylistForm = true;
