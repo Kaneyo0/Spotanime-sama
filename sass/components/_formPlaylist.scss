@@ -5,8 +5,9 @@
   }
 
 .form-playlist {
-    height: 40%;
+    height: 50%;
     width: 60%;
+    padding: 1rem 0;
     background-color: var(--clr-black);
     display: flex;
     flex-direction: column;
@@ -21,12 +22,17 @@
     border-radius: 10px;
     animation: .2s ease-in 0s fade;
     &__list {
+        background-color: var(--clr-black-light);
         overflow-y: auto;
+        width: 100%;
         padding: 1rem;
         list-style: none;
         display: flex;
         flex-direction: column;
         gap: .5rem;
+        /* Firefox scrollbar */
+        scrollbar-color: var(--clr-card-main) rgba(0, 0, 0, 0);
+        scrollbar-width: thin;
          /* width */
         &::-webkit-scrollbar {
             width: .5rem

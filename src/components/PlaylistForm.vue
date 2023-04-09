@@ -43,6 +43,7 @@
                 }
             },
             addSong(playlistData) {
+                console.log(playlistData, playlistData.songs.some(song => song === this.store.clickedSong))
                 if(!playlistData.songs.some(song => song === this.store.clickedSong)) {
                     playlistData.songs.push(this.store.clickedSong);
                     this.upsertPlaylist(playlistData);

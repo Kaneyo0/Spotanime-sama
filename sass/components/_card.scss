@@ -28,7 +28,7 @@
         background-color: rgb(255, 191, 0);
         text-decoration: none;
         text-align: center;
-        color: black;
+        color: var(--clr-black);
         padding-top: 2.3rem;
     }
     &__title {
@@ -41,10 +41,11 @@
         cursor: pointer;
         position: absolute;
         background-color: var(--clr-card-main);
+        color: var(--clr-black);
         padding: 0.3rem;
         border-radius: 50px;
-        right: -0.5rem;
-        top: -0.5rem;
+        right: -0.3rem;
+        top: -0.3rem;
         z-index: 1;
         transform: scale(1.2);
         &:hover {
