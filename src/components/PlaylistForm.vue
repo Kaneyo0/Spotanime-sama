@@ -65,7 +65,7 @@
                     :id="playlist.id"
                     :title="playlist.title"
                     :edited="playlist.edited"
-                    :songs="playlist.songs.map(song => `${store.playlistIRI}/${song.id}`)"
+                    :songs="playlist.songs?.map(song => `${store.playlistIRI}/${song.id}`)"
                     :image="playlist.image"
                     @toggleEdit="toggleEdit"
                     @updateTitle="upsertPlaylist"
