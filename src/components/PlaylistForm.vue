@@ -37,17 +37,13 @@
                     this.localPlaylists.splice(localIndex, 1);
                     localStorage.setItem('playlistsId', JSON.stringify(this.store.list.playlist.items.map(playlist => playlist.id)))    
                 } else {
-                    this.store.list.playlist.items[index] = { ...playlistData, title: playlistData.name };
+                    // this.store.list.playlist.items[index] = { ...playlistData, title: playlistData.name };
                     this.store.patchPlaylist(playlistData);
                     this.existingPlaylists[index].edited = false;
                 }
             },
             addSong(playlistData) {
-                console.log(playlistData, playlistData.songs.some(song => song === this.store.clickedSong))
-                if(!playlistData.songs.some(song => song === this.store.clickedSong)) {
-                    playlistData.songs.push(this.store.clickedSong);
-                    this.upsertPlaylist(playlistData);
-                }
+                this.upsertPlaylist(playlistData);
                 this.store.hideForm();
             }
         },
@@ -69,7 +65,7 @@
                     :id="playlist.id"
                     :title="playlist.title"
                     :edited="playlist.edited"
-                    :songs="playlist.song"
+                    :songs="playlist.songs.map(song => `${store.playlistIRI}/${song.id}`)"
                     :image="playlist.image"
                     @toggleEdit="toggleEdit"
                     @updateTitle="upsertPlaylist"

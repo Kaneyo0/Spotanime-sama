@@ -22,6 +22,11 @@
                 default: []
             }
         },
+        data() {
+            return {
+                store: store
+            }
+        },
         computed: {
             toBodyRequest() {
                 return { 
@@ -44,13 +49,11 @@
             },
             addSong(ev) {
                 if(ev.target.className.includes('inline-card')) {
+                    if(!this.songs.includes(this.store.clickedSong)) {
+                        this.songs.push(this.store.clickedSong);
+                    }
                     this.$emit('add-song', this.toBodyRequest)
                 }
-            }
-        },
-        data() {
-            return {
-                store: store
             }
         }
     }
