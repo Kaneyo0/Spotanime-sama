@@ -190,13 +190,14 @@ const store = {
     },
 
     async insertPlaylist(playlistData) {
+        console.log(JSON.stringify(playlistData))
         const response = await fetch(`${API.PLAYLISTS}`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
             },
             body: JSON.stringify(playlistData)
-        });
+        })
         const { id } = await response.json();
         return id;
     },

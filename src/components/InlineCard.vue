@@ -15,7 +15,6 @@
             },
             image: {
                 type: String,
-                default: '/assets/playlist.svg'
             },
             songs: {
                 type: Array,
@@ -66,7 +65,7 @@
         </div>
         <div class="inline-card__buttons">
             <i class="material-symbols-outlined" @click="$emit('toggleEdit', this.toBodyRequest)">edit</i>
-            <i class="material-symbols-outlined">delete</i>
+            <i class="material-symbols-outlined" @click="$emit('deletePlaylist', toBodyRequest)">delete</i>
         </div>
     </div>
     <div :data-id=id class="inline-card" v-else>
@@ -76,6 +75,7 @@
         </div>
         <div class="inline-card__buttons">
             <i class="material-symbols-outlined" @click="$emit('toggleEdit', this.toBodyRequest)">done</i>
+            <i class="material-symbols-outlined" @click="$emit('deletePlaylist', toBodyRequest)">delete</i>
         </div>
     </div>
 </template>
