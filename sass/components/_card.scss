@@ -41,15 +41,15 @@
         cursor: pointer;
         position: absolute;
         background-color: var(--clr-card-main);
-        width: 2.7rem;
         padding: 0.3rem;
         border-radius: 50px;
         right: -0.5rem;
         top: -0.5rem;
         z-index: 1;
+        transform: scale(1.2);
         &:hover {
             background-color: var(--clr-card-main-hover);
-            transform: scale(1.1);
+            transform: scale(1.4);
         }
     }
 }

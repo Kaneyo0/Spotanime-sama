@@ -1,10 +1,5 @@
 <script>
     export default {
-        data() {
-            return {
-                playlistSvg: '/assets/playlist-add.svg'
-            }
-        },
         props: {
             id: {
                 type: Number
@@ -29,7 +24,7 @@
 
 <template>
     <div class="card__bloc">
-        <img class="card__playlist-add" :src="this.playlistSvg" v-show="isSongCard">
+        <span class="material-symbols-outlined card__playlist-add" v-show="isSongCard">playlist_add</span>
         <RouterLink :to="`${detailRoute}/${id}`" :data-id="id" :data-title="title" :data-image="image" class="card">
             <img v-if="image.includes(`/`)" :src="image" alt="card image" class="card__image" v-show="image != ''">
             <span v-else class="material-symbols-outlined card__icon">{{ image }}</span>
