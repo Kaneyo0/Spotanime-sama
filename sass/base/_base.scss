@@ -16,3 +16,10 @@ body {
     overflow: hidden;
     margin-bottom: 10rem;
 }
+
+main {
+    transition: filter .2s;
+    &.blur {
+        filter: blur(2px)
+     }
+}

@@ -37,7 +37,7 @@
         text-transform: uppercase;
         color: var(--clr-light-mute);
     }
-    &__playlist-add {
+    &__playlist-add, &__playlist-rm {
         cursor: pointer;
         position: absolute;
         background-color: var(--clr-card-main);

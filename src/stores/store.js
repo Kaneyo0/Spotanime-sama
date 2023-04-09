@@ -258,13 +258,13 @@ const store = {
     showForm() {
         if(!this.showPlaylistForm) {
             this.showPlaylistForm = true;
-            document.querySelector('.container__lists')?.classList.add('blur');
+            document.querySelector('main')?.classList.add('blur');
         }
     },
 
     hideForm() {
         this.showPlaylistForm = false;
-        document.querySelector('.container__lists')?.classList.remove('blur');
+        document.querySelector('main')?.classList.remove('blur');
     }
 }
 

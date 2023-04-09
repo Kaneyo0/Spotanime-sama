@@ -22,7 +22,6 @@
 
 <template>
     <main class="container">
-        <PlaylistForm v-show="store.showPlaylistForm"></PlaylistForm>
         <ul class="container__lists">
             <li class="container__lists__item" v-for="(list, name) in store.list">
                 <CardList
