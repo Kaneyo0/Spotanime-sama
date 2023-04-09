@@ -83,7 +83,7 @@ const store = {
                 artists.push({
                     ...currentData,
                     title: currentData.name,
-                    image: ''
+                    image: 'person'
                 });
             }
             
@@ -92,7 +92,7 @@ const store = {
             console.error(error);
         }
     },
-
+    
     async fetchArtist(id) {
         try {
             let albumId;
@@ -107,9 +107,9 @@ const store = {
             for (const currentData of data.albums) {
                 albumId = currentData.split('/')[7];
                 promises.push(this.fetchAlbum(albumId)
-                .then(album => {
-                    artist.albums.push(album);
-                })
+                    .then(album => {
+                        artist.albums.push(album);
+                    })
                 );
             }
             
@@ -133,36 +133,38 @@ const store = {
         }
     },
 
-        /**
+    /**
      * 
      * @param {*} id 
      * @returns {Promise<*>}
     */
-   async fetchAlbum(id) {
-    try {
-         const response = await fetch(`${API.ALBUMS}/${id}`);
-         const data = await response.json();
-         const album = {
-             ...data,
-             songs: []
-         };
-         
-         this.setMusicListImages(data.songs).then(songs => {
-             album.songs = songs;
-         });
-         
-         return album;
-     } catch (error) {
-         console.error(error);
-     }
- },
- 
+    async fetchAlbum(id) {
+        try {
+            const response = await fetch(`${API.ALBUMS}/${id}`);
+            const data = await response.json();
+            const album = {
+                ...data,
+                songs: []
+            };
+            
+            this.setMusicListImages(data.songs).then(songs => {
+                album.songs = songs;
+            });
+            
+            return album;
+        } catch (error) {
+            console.error(error);
+        }
+    },
     
     async fetchPlaylists() {
         const listId = JSON.parse(localStorage.getItem('playlistsId')) || [];
         const playlists = [];
         for(const id of listId) {
-            playlists.push(await this.fetchPlaylist(id))
+            await this.fetchPlaylist(id).then(result => {
+                result.image = 'queue_music';
+                playlists.push(result);
+            });
         }
         return playlists
     },
@@ -170,9 +172,18 @@ const store = {
     async fetchPlaylist(playlistId) {
         try {
             let response = await fetch(`${API.PLAYLISTS}/${playlistId}`);
-            const { name: title, songs, id} = await response.json()
+            const data = await response.json();
+            const playlist = { 
+                id: data.id,
+                title: data.name, 
+                songs: [], 
+            }
+
+            this.setMusicListImages(data.songs).then(songs => {
+                playlist.songs = songs;
+            });
             
-            return { id, title, songs};
+            return playlist;
         } catch (error) {
             console.error(error);
         }
@@ -205,7 +216,8 @@ const store = {
             const searchResult = {
                 songs: [],
                 albums: [],
-                artists: []
+                artists: [],
+                playlists: []
             };
             
             await Promise.all([
@@ -217,6 +229,13 @@ const store = {
                 }),
                 this.fetchMostListenedArtist(research).then(result => {
                     searchResult.artists = result;
+                }),
+                this.fetchPlaylists().then(result => {
+                    result.forEach(playlist => {
+                        if (playlist.title.toLowerCase().includes(research.toLowerCase())) {
+                            searchResult.playlists.push(playlist);
+                        }
+                    });
                 })
             ]);
             
@@ -243,7 +262,7 @@ const store = {
         }
     },
 
-    hideForm () {
+    hideForm() {
         this.showPlaylistForm = false;
         document.querySelector('.container__lists')?.classList.remove('blur');
     }

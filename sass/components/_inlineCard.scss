@@ -4,6 +4,12 @@
     gap: 1rem;
     justify-content: space-between;
     cursor: pointer;
+    // &__content {
+    //     background-color: var(--clr-card-main);
+    // }
+    // &__content:hover {
+    //     background-color: var(--clr-card-main-hover);
+    // }
     &__img:hover, &__title:hover {
         transform: scale(1.10);
     }

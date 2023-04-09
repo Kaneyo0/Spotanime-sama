@@ -1,0 +1,19 @@
+.detail {
+    &__song {
+        padding: 1rem;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        &-title {
+            padding: 1rem;
+            color: var(--clr-light-mute);
+            font-size: 1.5rem;
+            text-transform: uppercase;
+        }
+        &-player {
+            width: 50rem;
+            height: 30rem;
+        }
+    }
+}

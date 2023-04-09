@@ -10,7 +10,8 @@
                 searchResults: {
                     songs: [],
                     albums: [],
-                    artists: []
+                    artists: [],
+                    playlists: []
                 }
             }
         },
@@ -20,10 +21,11 @@
         methods: {
             startSearching(event) {
                 const research = event.target.value;
-                this.searchResults =  {
+                this.searchResults = {
                     songs: [],
                     albums: [],
-                    artists: []
+                    artists: [],
+                    playlists: []
                 }
 
                 if (research !== "") {
@@ -37,6 +39,9 @@
                             }),
                             results.artists.forEach(artist => {
                                 if (this.searchResults.artists.length < 3) this.searchResults.artists.push(artist)
+                            }),
+                            results.playlists.forEach(playlist => {
+                                if (this.searchResults.playlists.length < 3) this.searchResults.playlists.push(playlist)
                             })
                         ]);
                     });
@@ -58,6 +63,8 @@
             <SearchResult v-for="result in searchResults.albums" :id="result.id" :value="result.title" :detailRoute="`/albums`"/>
             <p class="header__result-title" v-show="searchResults.artists.length > 0">artists</p>
             <SearchResult v-for="result in searchResults.artists" :id="result.id" :value="result.name" :detailRoute="`/artists`"/>
+            <p class="header__result-title" v-show="searchResults.playlists.length > 0">playlists</p>
+            <SearchResult v-for="result in searchResults.playlists" :id="result.id" :value="result.title" :detailRoute="`/playlists`"/>
         </ul>
     </header>
 </template>
