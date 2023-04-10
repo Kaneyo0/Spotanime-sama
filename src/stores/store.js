@@ -74,7 +74,7 @@ const store = {
     async fetchMostListenedArtist(name = "") {
         try {
             let request = `${API.ARTISTS}?page=1`;
-            if (name) request = `${API.ARTISTS}?page=1&title=${name}`;
+            if (name) request = `${API.ARTISTS}?page=1&name=${name}`;
             const response = await fetch(request);
             const data = await response.json();
             const artists = [];
@@ -239,7 +239,7 @@ const store = {
                     });
                 })
             ]);
-            
+
             return searchResult;
         } catch (error) {
             console.error(error);
