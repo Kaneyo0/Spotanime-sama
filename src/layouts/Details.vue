@@ -41,9 +41,6 @@
         },
         async created() {
             await this.fetchDetails();
-        },
-        async updated() {
-            await this.fetchDetails();
         }
     }
 </script>
@@ -60,7 +57,7 @@
             <CardList :detailRoute="store.list.songs.detailRoute" :name="'songs'" :isSongList="true" :title="this.album.title" :cards="this.album.songs"></CardList>
         </div>
         <div v-else-if="this.$route.name == 'playlist details'" class="detail__playlist">
-            <CardList :detailRoute="store.list.songs.detailRoute" :name="'songs'" :isSongList="true" :title="this.playlist.title" :cards="this.playlist.songs" @reload="reloadComponent"></CardList>
+            <CardList :detailRoute="store.list.songs.detailRoute" :name="'songs'" :isSongList="true" :title="this.playlist.title" :cards="this.playlist.songs" @reload="fetchDetails"></CardList>
         </div>
         <div v-else class="default">
             <h1> Il n'y a rien ici </h1>
